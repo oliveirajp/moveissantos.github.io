@@ -6,160 +6,530 @@
   <title>Móveis Santos | Design, Fabrico e Mobiliário em Guimarães</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #1f2937;
-      --accent: #b48c58;
-      --bg-light: #f9fafb;
-      --text: #374151;
-      --text-muted: #6b7280;
-      --white: #ffffff;
+      --bg: #0f1115;
+      --bg-surface: #171a21;
+      --bg-card: #1e222b;
+      --accent: #d4af37;
+      --accent-soft: rgba(212, 175, 55, 0.12);
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --border: rgba(255, 255, 255, 0.08);
+      --radius: 12px;
+      --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); background: var(--white); line-height: 1.6; }
-    header { position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid #e5e7eb; z-index: 100; }
-    .nav-container { max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; }
-    .logo { font-size: 1.4rem; font-weight: 700; color: var(--primary); text-decoration: none; letter-spacing: 1px; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .serif {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    /* Animações de Entrada (Scroll-reveal) */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(15, 17, 21, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      transition: var(--transition);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2rem;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
     .logo span { color: var(--accent); }
-    nav a { text-decoration: none; color: var(--text); margin-left: 1.25rem; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
-    nav a:hover { color: var(--accent); }
+    nav { display: flex; gap: 2rem; }
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      position: relative;
+      transition: var(--transition);
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    nav a:hover { color: var(--text); }
+    nav a:hover::after { width: 100%; }
 
-    .hero { background: linear-gradient(rgba(17,24,39,0.7), rgba(17,24,39,0.7)), #27272a; color: white; padding: 6rem 1.5rem; text-align: center; }
-    .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; letter-spacing: -0.5px; }
-    .hero p { font-size: 1.25rem; max-width: 650px; margin: 0 auto 2rem; color: #e5e7eb; }
-    .quote { font-style: italic; color: #cbd5e1; font-size: 1rem; margin-top: 1rem; }
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      background: radial-gradient(ellipse at 50% 20%, rgba(212, 175, 55, 0.08), transparent 70%), var(--bg);
+      position: relative;
+    }
+    .hero-content { max-width: 850px; }
+    .badge {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      background: var(--accent-soft);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: var(--accent);
+      border-radius: 50px;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      color: #ffffff;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      font-weight: 300;
+    }
+    .quote-hero {
+      font-style: italic;
+      color: var(--accent);
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+      opacity: 0.9;
+    }
+    .btn-group { display: flex; gap: 1rem; justify-content: center; }
+    .btn {
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0f1115;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.4);
+    }
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
 
-    section { max-width: 1100px; margin: auto; padding: 4rem 1.5rem; }
-    .section-title { text-align: center; margin-bottom: 2.5rem; }
-    .section-title h2 { font-size: 2rem; color: var(--primary); margin-bottom: 0.5rem; }
-    .section-title p { color: var(--text-muted); }
+    /* Secções Comuns */
+    section { padding: 7rem 2rem; max-width: 1200px; margin: auto; }
+    .section-header { margin-bottom: 4rem; text-align: center; }
+    .section-header h2 { font-size: clamp(2.2rem, 4vw, 3.2rem); margin-bottom: 0.75rem; }
+    .section-header p { color: var(--text-muted); max-width: 500px; margin: auto; }
 
-    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-    .card { background: var(--bg-light); border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; transition: transform 0.2s; }
-    .card:hover { transform: translateY(-3px); }
-    .card h3 { color: var(--primary); margin-bottom: 0.75rem; font-size: 1.2rem; }
+    /* Diferenciais (Cards 3D/Fabrico/Montagem) */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .feature-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 3rem 2.5rem;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .feature-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(212, 175, 55, 0.3);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
+    .feature-card:hover::before { opacity: 1; }
+    .feature-card .step-num {
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .feature-card h3 { font-size: 1.8rem; margin-bottom: 1rem; color: #ffffff; }
+    .feature-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; }
 
-    .services-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
-    .services-list li { background: var(--bg-light); border-left: 4px solid var(--accent); padding: 1rem; border-radius: 0 6px 6px 0; }
+    /* Serviços (Lista Minimalista) */
+    .services-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .services-text h3 { font-size: 2.2rem; margin-bottom: 1.5rem; line-height: 1.2; }
+    .services-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .service-row {
+      padding: 1.2rem 1.5rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .service-row:hover {
+      border-color: var(--accent);
+      transform: translateX(8px);
+      background: var(--bg-card);
+    }
+    .service-row span { font-weight: 500; font-size: 1rem; }
+    .service-row .arrow { color: var(--accent); transition: transform 0.3s; }
+    .service-row:hover .arrow { transform: translateX(5px); }
 
-    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.25rem; }
-    .portfolio-item { background: #f3f4f6; border-radius: 8px; height: 160px; display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--primary); text-align: center; padding: 1rem; border: 1px dashed #d1d5db; }
+    /* Portfólio com Filtros */
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.5rem 1.4rem;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: var(--transition);
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #0f1115;
+    }
 
-    .contact-box { background: var(--primary); color: white; border-radius: 12px; padding: 3rem 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; }
-    .contact-box h3 { color: var(--accent); margin-bottom: 0.5rem; }
-    .contact-box a { color: #f9fafb; text-decoration: none; }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .portfolio-card {
+      background: var(--bg-surface);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      aspect-ratio: 4/3;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 2rem;
+      transition: var(--transition);
+    }
+    .portfolio-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(15, 17, 21, 0.95), transparent 60%);
+      transition: var(--transition);
+    }
+    .portfolio-card:hover {
+      transform: scale(1.02);
+      border-color: rgba(212, 175, 55, 0.4);
+    }
+    .portfolio-info { position: relative; z-index: 2; }
+    .portfolio-cat { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; }
+    .portfolio-name { font-size: 1.4rem; color: #fff; font-family: 'Cormorant Garamond', serif; }
 
-    footer { text-align: center; padding: 2rem; font-size: 0.875rem; color: var(--text-muted); border-top: 1px solid #e5e7eb; }
-    @media(max-width: 768px) { nav { display: none; } }
+    /* Contactos */
+    .contact-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 4rem 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 3rem;
+      position: relative;
+    }
+    .contact-card h4 { font-size: 0.85rem; text-transform: uppercase; color: var(--accent); letter-spacing: 0.15em; margin-bottom: 1rem; }
+    .contact-card p, .contact-card a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; line-height: 1.8; }
+    .contact-card a:hover { color: var(--accent); }
+
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 850px) {
+      nav { display: none; }
+      .services-container { grid-template-columns: 1fr; }
+      .hero { padding-top: 7rem; }
+    }
   </style>
 </head>
 <body>
 
+  <!-- Header -->
   <header>
-    <div class="nav-container">
-      <a href="#" class="logo">MS <span>Móveis Santos</span></a>
+    <div class="nav-inner">
+      <a href="#" class="logo">MS <span>Santos</span></a>
       <nav>
         <a href="#sobre">Sobre</a>
+        <a href="#diferenciais">Design & Fabrico</a>
         <a href="#servicos">Serviços</a>
-        <a href="#diferenciais">Diferenciais</a>
-        <a href="#portfolio">Portfolio</a>
+        <a href="#portfolio">Portfólio</a>
         <a href="#contactos">Contactos</a>
       </nav>
     </div>
   </header>
 
+  <!-- Hero -->
   <section class="hero">
-    <h1>48 Anos de Excelência</h1>
-    <p>Inovação, qualidade e design para transformar a sua casa naquilo que sempre sonhou.</p>
-    <div class="quote">"Não se pode criar experiência. É preciso passar por ela." — Albert Camus</div>
+    <div class="hero-content">
+      <div class="badge reveal">48 Anos de Excelência • Desde 1976</div>
+      <h1 class="reveal">Inovação, qualidade & design à sua medida.</h1>
+      <div class="quote-hero reveal">"Não se pode criar experiência. É preciso passar por ela" — Albert Camus</div>
+      <p class="reveal">Projetos 3D, marcenaria qualificada e soluções completas de mobiliário para transformar a sua visão num espaço real.</p>
+      <div class="btn-group reveal">
+        <a href="#portfolio" class="btn btn-primary">Ver Portfólio</a>
+        <a href="#contactos" class="btn btn-outline">Solicitar Orçamento</a>
+      </div>
+    </div>
   </section>
 
+  <!-- Sobre / Pilares -->
   <section id="sobre">
-    <div class="section-title">
-      <h2>Sobre Nós</h2>
-      <p>A simbiose perfeita para um serviço de excelência</p>
+    <div class="section-header reveal">
+      <h2>A Nossa Marca</h2>
+      <p>Uma relação de confiança com um serviço de excelência contínua.</p>
     </div>
-    <p style="text-align: center; max-width: 800px; margin: auto; font-size: 1.1rem;">
-      Há 48 anos no mercado, estabelecemos com os nossos clientes uma relação de confiança, uma marca que nos distingue. Visite a nossa loja e encontre a melhor solução para o seu lar.
-    </p>
+    <div style="max-width: 800px; margin: auto; text-align: center; font-size: 1.15rem; color: #d1d5db; font-weight: 300;" class="reveal">
+      Há quase cinco décadas no mercado, criamos a simbiose perfeita entre marcenaria tradicional, tecnologia de visualização tridimensional e acompanhamento personalizado em Guimarães.
+    </div>
   </section>
 
-  <section id="servicos">
-    <div class="section-title">
-      <h2>Produtos e Serviços</h2>
-      <p>Solicite já um orçamento totalmente grátis</p>
-    </div>
-    <ul class="services-list">
-      <li>Todo o tipo de mobiliário com os melhores materiais</li>
-      <li>O sofá perfeito para si — <em>chaise-longue</em>, sofá-cama e mais</li>
-      <li>Cortinados combinados à medida do seu mobiliário</li>
-      <li>Soluções de iluminação aliando moda e tecnologia</li>
-      <li>Instalação de papel de parede — solução moderna e prática</li>
-      <li>Decoração de andares modelo e espaços comerciais</li>
-      <li>Lista de casamento — a prenda perfeita para o dia ideal</li>
-    </ul>
-  </section>
-
+  <!-- Diferenciais / Como Trabalhamos -->
   <section id="diferenciais">
-    <div class="section-title">
-      <h2>O Que Nos Distingue</h2>
-      <p>Acompanhamento completo da ideia à instalação</p>
+    <div class="section-header reveal">
+      <h2>Como Damos Vida ao Seu Espaço</h2>
+      <p>Do primeiro esboço digital à montagem final sem fricção.</p>
     </div>
-    <div class="grid-3">
-      <div class="card">
-        <h3>Design 3D</h3>
-        <p>Com tecnologias de ponta e especialistas em 3D, crie e experimente o seu mobiliário à medida do seu espaço antes de produzir.</p>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <span class="step-num">01 / Conceção</span>
+        <h3>Design & 3D</h3>
+        <p>Elaboramos projetos 3D hiper-realistas adaptados à métrica exata da sua divisão. Experimente acabamentos, cores e formatos até encontrar o modelo perfeito.</p>
       </div>
-      <div class="card">
+      <div class="feature-card reveal">
+        <span class="step-num">02 / Execução</span>
         <h3>Fabrico Próprio</h3>
-        <p>Marcenaria e acabamentos com maquinaria moderna e técnicos especializados. Visite a nossa fábrica e comprove a qualidade.</p>
+        <p>Serviços de marcenaria e acabamentos executados em maquinaria de precisão por técnicos qualificados. Sem intermediários, com controlo direto da matéria-prima.</p>
       </div>
-      <div class="card">
-        <h3>Entrega e Montagem Grátis</h3>
-        <p>Tratamos do transporte, acomodação e montagem com limpeza do espaço para uma experiência totalmente livre de preocupações.</p>
+      <div class="feature-card reveal">
+        <span class="step-num">03 / Conclusão</span>
+        <h3>Entrega & Montagem</h3>
+        <p>Transporte especializado, montagem rigorosa e limpeza total da divisão. Serviço integral gratuito para que só tenha de desfrutar do seu novo espaço.</p>
       </div>
     </div>
   </section>
 
+  <!-- Serviços -->
+  <section id="servicos">
+    <div class="services-container">
+      <div class="services-text reveal">
+        <span class="badge">Especialidades</span>
+        <h3>Soluções completas para interiores residenciais e comerciais.</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Cada detalhe é estudado para conjugar estética intemporal e ergonomia para o dia a dia.</p>
+      </div>
+      <ul class="services-list reveal">
+        <li class="service-row"><span>Mobiliário à medida & carpintaria</span><span class="arrow">→</span></li>
+        <li class="service-row"><span>Sofás personalizados (chaise-longue, sofá-cama)</span><span class="arrow">→</span></li>
+        <li class="service-row"><span>Cortinados e estofos por medida</span><span class="arrow">→</span></li>
+        <li class="service-row"><span>Iluminação técnica e decorativa</span><span class="arrow">→</span></li>
+        <li class="service-row"><span>Aplicação de papel de parede de autor</span><span class="arrow">→</span></li>
+        <li class="service-row"><span>Decoração de andares modelo & lojas</span><span class="arrow">→</span></li>
+        <li class="service-row"><span>Serviço dedicado de listas de casamento</span><span class="arrow">→</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Portfolio Interativo -->
   <section id="portfolio">
-    <div class="section-title">
-      <h2>Portfolio</h2>
-      <p>Veja algumas das nossas propostas</p>
+    <div class="section-header reveal">
+      <h2>Portfólio de Projetos</h2>
+      <p>Explore algumas das nossas criações recentes.</p>
     </div>
+
+    <div class="filters reveal">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="sala">Salas</button>
+      <button class="filter-btn" data-filter="quarto">Quartos</button>
+      <button class="filter-btn" data-filter="detalhes">Pormenores</button>
+    </div>
+
     <div class="portfolio-grid">
-      <div class="portfolio-item">Cadeira</div>
-      <div class="portfolio-item">Sofá</div>
-      <div class="portfolio-item">Quarto Criança</div>
-      <div class="portfolio-item">Almofada Pão de Forma</div>
-      <div class="portfolio-item">Móvel de Entrada</div>
-      <div class="portfolio-item">Roupeiros</div>
-      <div class="portfolio-item">Quarto Casal</div>
-      <div class="portfolio-item">Antes e Depois</div>
+      <div class="portfolio-card reveal" data-category="sala">
+        <div class="portfolio-info">
+          <div class="portfolio-cat">Sala de Estar</div>
+          <div class="portfolio-name">Sofá Seccional à Medida</div>
+        </div>
+      </div>
+      <div class="portfolio-card reveal" data-category="quarto">
+        <div class="portfolio-info">
+          <div class="portfolio-cat">Quarto</div>
+          <div class="portfolio-name">Quarto de Casal & Iluminação</div>
+        </div>
+      </div>
+      <div class="portfolio-card reveal" data-category="quarto">
+        <div class="portfolio-info">
+          <div class="portfolio-cat">Quarto</div>
+          <div class="portfolio-name">Quarto Juvenil Modular</div>
+        </div>
+      </div>
+      <div class="portfolio-card reveal" data-category="sala">
+        <div class="portfolio-info">
+          <div class="portfolio-cat">Entrada</div>
+          <div class="portfolio-name">Consola & Móvel de Hall</div>
+        </div>
+      </div>
+      <div class="portfolio-card reveal" data-category="quarto">
+        <div class="portfolio-info">
+          <div class="portfolio-cat">Armazenamento</div>
+          <div class="portfolio-name">Roupeiros Embutidos</div>
+        </div>
+      </div>
+      <div class="portfolio-card reveal" data-category="detalhes">
+        <div class="portfolio-info">
+          <div class="portfolio-cat">Design Exclusivo</div>
+          <div class="portfolio-name">Almofada Pão de Forma</div>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- Contactos -->
   <section id="contactos">
-    <div class="contact-box">
+    <div class="contact-card reveal">
       <div>
-        <h3>Horário</h3>
-        <p>Segunda a Sábado<br>09h30 às 19h30</p>
+        <h4>Atendimento</h4>
+        <p>Segunda a Sábado<br><strong style="color: #fff;">09h30 — 19h30</strong></p>
       </div>
       <div>
-        <h3>Contactos</h3>
-        <p>Telefone: <a href="tel:+351253576312">(+351) 253 576 312</a></p>
+        <h4>Contactos Diretos</h4>
+        <p>Telefone: <a href="tel:+351253576312">+351 253 576 312</a></p>
         <p>Email: <a href="mailto:geral@moveissantos.com">geral@moveissantos.com</a></p>
       </div>
       <div>
-        <h3>Localização</h3>
-        <p>Rua S. João Baptista 1803/1881<br>4805-319 Ponte, Guimarães<br>Portugal</p>
+        <h4>Loja & Fábrica</h4>
+        <p>Rua S. João Baptista, 1803/1881<br>4805-319 Ponte, Guimarães<br>Portugal</p>
       </div>
     </div>
   </section>
 
   <footer>
-    <p>Copyrights © MS Móveis Santos — Todos os direitos reservados.</p>
+    <p>© Móveis Santos. 48 Anos de Tradição e Excelência Mobiliária.</p>
   </footer>
 
+  <!-- Script de Micro-Interações & Animações -->
+  <script>
+    // 1. Intersection Observer para Reveal Animations suaves
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // 2. Filtro interativo do Portfólio
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const items = document.querySelectorAll('.portfolio-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const category = btn.getAttribute('data-filter');
+        items.forEach(item => {
+          if (category === 'all' || item.getAttribute('data-category') === category) {
+            item.style.display = 'flex';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
