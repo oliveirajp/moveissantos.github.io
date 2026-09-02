@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Móveis Santos | Design, Fabrico e Mobiliário em Guimarães</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1f2937;
+      --accent: #b48c58;
+      --bg-light: #f9fafb;
+      --text: #374151;
+      --text-muted: #6b7280;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; color: var(--text); background: var(--white); line-height: 1.6; }
+    header { position: sticky; top: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid #e5e7eb; z-index: 100; }
+    .nav-container { max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; }
+    .logo { font-size: 1.4rem; font-weight: 700; color: var(--primary); text-decoration: none; letter-spacing: 1px; }
+    .logo span { color: var(--accent); }
+    nav a { text-decoration: none; color: var(--text); margin-left: 1.25rem; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    nav a:hover { color: var(--accent); }
+
+    .hero { background: linear-gradient(rgba(17,24,39,0.7), rgba(17,24,39,0.7)), #27272a; color: white; padding: 6rem 1.5rem; text-align: center; }
+    .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; letter-spacing: -0.5px; }
+    .hero p { font-size: 1.25rem; max-width: 650px; margin: 0 auto 2rem; color: #e5e7eb; }
+    .quote { font-style: italic; color: #cbd5e1; font-size: 1rem; margin-top: 1rem; }
+
+    section { max-width: 1100px; margin: auto; padding: 4rem 1.5rem; }
+    .section-title { text-align: center; margin-bottom: 2.5rem; }
+    .section-title h2 { font-size: 2rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .section-title p { color: var(--text-muted); }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .card { background: var(--bg-light); border: 1px solid #e5e7eb; border-radius: 8px; padding: 2rem; transition: transform 0.2s; }
+    .card:hover { transform: translateY(-3px); }
+    .card h3 { color: var(--primary); margin-bottom: 0.75rem; font-size: 1.2rem; }
+
+    .services-list { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+    .services-list li { background: var(--bg-light); border-left: 4px solid var(--accent); padding: 1rem; border-radius: 0 6px 6px 0; }
+
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.25rem; }
+    .portfolio-item { background: #f3f4f6; border-radius: 8px; height: 160px; display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--primary); text-align: center; padding: 1rem; border: 1px dashed #d1d5db; }
+
+    .contact-box { background: var(--primary); color: white; border-radius: 12px; padding: 3rem 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; }
+    .contact-box h3 { color: var(--accent); margin-bottom: 0.5rem; }
+    .contact-box a { color: #f9fafb; text-decoration: none; }
+
+    footer { text-align: center; padding: 2rem; font-size: 0.875rem; color: var(--text-muted); border-top: 1px solid #e5e7eb; }
+    @media(max-width: 768px) { nav { display: none; } }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">MS <span>Móveis Santos</span></a>
+      <nav>
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#contactos">Contactos</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>48 Anos de Excelência</h1>
+    <p>Inovação, qualidade e design para transformar a sua casa naquilo que sempre sonhou.</p>
+    <div class="quote">"Não se pode criar experiência. É preciso passar por ela." — Albert Camus</div>
+  </section>
+
+  <section id="sobre">
+    <div class="section-title">
+      <h2>Sobre Nós</h2>
+      <p>A simbiose perfeita para um serviço de excelência</p>
+    </div>
+    <p style="text-align: center; max-width: 800px; margin: auto; font-size: 1.1rem;">
+      Há 48 anos no mercado, estabelecemos com os nossos clientes uma relação de confiança, uma marca que nos distingue. Visite a nossa loja e encontre a melhor solução para o seu lar.
+    </p>
+  </section>
+
+  <section id="servicos">
+    <div class="section-title">
+      <h2>Produtos e Serviços</h2>
+      <p>Solicite já um orçamento totalmente grátis</p>
+    </div>
+    <ul class="services-list">
+      <li>Todo o tipo de mobiliário com os melhores materiais</li>
+      <li>O sofá perfeito para si — <em>chaise-longue</em>, sofá-cama e mais</li>
+      <li>Cortinados combinados à medida do seu mobiliário</li>
+      <li>Soluções de iluminação aliando moda e tecnologia</li>
+      <li>Instalação de papel de parede — solução moderna e prática</li>
+      <li>Decoração de andares modelo e espaços comerciais</li>
+      <li>Lista de casamento — a prenda perfeita para o dia ideal</li>
+    </ul>
+  </section>
+
+  <section id="diferenciais">
+    <div class="section-title">
+      <h2>O Que Nos Distingue</h2>
+      <p>Acompanhamento completo da ideia à instalação</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Design 3D</h3>
+        <p>Com tecnologias de ponta e especialistas em 3D, crie e experimente o seu mobiliário à medida do seu espaço antes de produzir.</p>
+      </div>
+      <div class="card">
+        <h3>Fabrico Próprio</h3>
+        <p>Marcenaria e acabamentos com maquinaria moderna e técnicos especializados. Visite a nossa fábrica e comprove a qualidade.</p>
+      </div>
+      <div class="card">
+        <h3>Entrega e Montagem Grátis</h3>
+        <p>Tratamos do transporte, acomodação e montagem com limpeza do espaço para uma experiência totalmente livre de preocupações.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <div class="section-title">
+      <h2>Portfolio</h2>
+      <p>Veja algumas das nossas propostas</p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-item">Cadeira</div>
+      <div class="portfolio-item">Sofá</div>
+      <div class="portfolio-item">Quarto Criança</div>
+      <div class="portfolio-item">Almofada Pão de Forma</div>
+      <div class="portfolio-item">Móvel de Entrada</div>
+      <div class="portfolio-item">Roupeiros</div>
+      <div class="portfolio-item">Quarto Casal</div>
+      <div class="portfolio-item">Antes e Depois</div>
+    </div>
+  </section>
+
+  <section id="contactos">
+    <div class="contact-box">
+      <div>
+        <h3>Horário</h3>
+        <p>Segunda a Sábado<br>09h30 às 19h30</p>
+      </div>
+      <div>
+        <h3>Contactos</h3>
+        <p>Telefone: <a href="tel:+351253576312">(+351) 253 576 312</a></p>
+        <p>Email: <a href="mailto:geral@moveissantos.com">geral@moveissantos.com</a></p>
+      </div>
+      <div>
+        <h3>Localização</h3>
+        <p>Rua S. João Baptista 1803/1881<br>4805-319 Ponte, Guimarães<br>Portugal</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Copyrights © MS Móveis Santos — Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>
